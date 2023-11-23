@@ -18,8 +18,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@share/*": ["../ums-share/*"]
+    }
   },
-  "include": ["src"],
+
+  "include": ["src", "../ums-share" ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

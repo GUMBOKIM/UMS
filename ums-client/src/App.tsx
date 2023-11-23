@@ -2,8 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {ShareType} from "@share/ShareType.ts";
 
 function App() {
+    const A: ShareType = {
+        a: 'a'
+    }
+    console.log(A)
   const [count, setCount] = useState(0)
 
   return (
