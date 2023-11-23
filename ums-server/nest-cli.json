@@ -3,7 +3,6 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "../",
   "entryFile": "ums-server/src/main",
-  "watchAssets": true,
   "compilerOptions": {
     "deleteOutDir": true
   }

@@ -1,23 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {Company} from "./company";
-import {Part} from "./part";
+import configOptions from './config/config.options';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'gumbo',
-      password: 'developer-gumbo',
-      database: 'union_mgmt',
-      entities: [Company, Part],
-      synchronize: true,
-    }),
-
+    ConfigModule.forRoot(configOptions),
+    TypeOrmModule.forRootAsync(databaseConfig()),
   ],
   controllers: [AppController],
   providers: [AppService],
