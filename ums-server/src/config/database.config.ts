@@ -1,7 +1,8 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Company } from '../company';
-import { Part } from '../part';
+import { Company } from '../entity/company';
+import { Part } from '../entity/part';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Member } from '../entity/member';
 
 export default () => {
   return {
@@ -14,8 +15,8 @@ export default () => {
       username: configService.get('DB_USERNAME'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      synchronize: configService.get('DB_SYNCHRONIZE') === 'true',
     }),
-    entities: [Company, Part],
+    entities: [Company, Part, Member],
+    synchronize: true,
   } as TypeOrmModuleOptions;
 };
