@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Company } from '../company';
 import { ForwardCategory } from './forwardCategory';
-import { ForwardPlanDetail } from './forwardPlanDetail';
+import { ForwardPart } from './forwardPart';
 import { ForwardFactory } from './forwardFactory';
 
 @Entity()
@@ -41,8 +41,8 @@ export class ForwardPlan {
   @Column({ nullable: true })
   memo?: string;
 
-  @OneToMany(() => ForwardPlanDetail, (detail) => detail.plan)
-  details: ForwardPlanDetail[];
+  @OneToMany(() => ForwardPart, (detail) => detail.plan)
+  parts: ForwardPart[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -6,16 +6,16 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ForwardPlan } from './forwardPlan';
+import { ReceivePlan } from './receivePlan';
 import { Part } from '../part';
 
 @Entity()
-export class ForwardPlanDetail {
+export class ReceivePart {
   @PrimaryGeneratedColumn('increment')
   id: string;
 
-  @ManyToOne(() => ForwardPlan, (receivePlan) => receivePlan.id)
-  plan: ForwardPlan;
+  @ManyToOne(() => ReceivePlan, (receivePlan) => receivePlan.id)
+  plan: ReceivePlan;
 
   @ManyToOne(() => Part, (part) => part.id)
   part: Part;

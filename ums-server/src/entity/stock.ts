@@ -6,9 +6,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Part } from './part';
 
 @Entity()
-export class Part {
+export class Stock {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Company } from '../company';
 import { ReceiveCategory } from './receiveCategory';
-import { ReceivePlanDetail } from './receivePlanDetail';
+import { ReceivePart } from './receivePart';
 
 @Entity()
 export class ReceivePlan {
@@ -37,8 +37,8 @@ export class ReceivePlan {
   @Column({ nullable: true })
   memo?: string;
 
-  @OneToMany(() => ReceivePlanDetail, (detail) => detail.plan)
-  details: ReceivePlanDetail[];
+  @OneToMany(() => ReceivePart, (detail) => detail.plan)
+  parts: ReceivePart[];
 
   @CreateDateColumn()
   createdAt: Date;
