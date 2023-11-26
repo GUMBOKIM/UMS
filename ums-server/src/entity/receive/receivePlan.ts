@@ -14,7 +14,7 @@ import { ReceivePart } from './receivePart';
 @Entity()
 export class ReceivePlan {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @ManyToOne(() => Company, (company) => company.id)
   supplier: Company;
