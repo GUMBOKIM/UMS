@@ -1,10 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Company } from '../entity/company';
-import { Part } from '../entity/part';
-import { Member } from '../entity/member';
-import { Stock } from '../entity/stock';
-import ForwardEntities from '../entity/forward';
-import ReceiveEntities from '../entity/receive';
+import Entities from '../entity';
 
 export default {
   type: 'mysql',
@@ -13,13 +8,6 @@ export default {
   username: 'gumbo',
   password: 'developer-gumbo',
   database: 'union_mgmt',
-  entities: [
-    Company,
-    Part,
-    Member,
-    Stock,
-    ...ForwardEntities,
-    ...ReceiveEntities,
-  ],
+  entities: Entities,
   synchronize: true,
 } as TypeOrmModuleOptions;

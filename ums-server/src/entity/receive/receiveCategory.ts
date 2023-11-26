@@ -11,7 +11,7 @@ import { Company } from '../company';
 @Entity()
 export class ReceiveCategory {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   name: string;

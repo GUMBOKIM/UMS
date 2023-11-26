@@ -12,7 +12,7 @@ import { Part } from '../part';
 @Entity()
 export class ReceivePart {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @ManyToOne(() => ReceivePlan, (receivePlan) => receivePlan.id)
   plan: ReceivePlan;

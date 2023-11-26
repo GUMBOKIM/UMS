@@ -15,9 +15,9 @@ export enum CompanyType {
 @Entity()
 export class Company {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Column({ type: 'enum', enum: CompanyType })
