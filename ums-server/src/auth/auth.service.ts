@@ -1,16 +1,11 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { SignInRequest, SignUpRequest } from './auth.type';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { SignInRequestBody, SignUpRequestBody } from './auth.type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member, MemberStatus } from '../entity/member';
 import { Repository } from 'typeorm';
 import { Company } from '../entity/company';
 import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -19,12 +14,11 @@ export class AuthService {
     private readonly memberRepository: Repository<Member>,
     @InjectRepository(Company)
     private readonly companyRepository: Repository<Company>,
-    private jwtService: JwtService,
   ) {}
 
-  async signUp(request: SignUpRequest) {
+  async signUp(requestBody: SignUpRequestBody) {
     const existMember = await this.memberRepository.findOneBy({
-      account: request.account,
+      account: requestBody.account,
     });
 
     if (!_.isEmpty(existMember)) {
@@ -32,34 +26,34 @@ export class AuthService {
     }
 
     const company = await this.companyRepository.findOneBy({
-      id: request.companyId,
+      id: requestBody.companyId,
     });
 
     if (_.isEmpty(company)) {
       throw new BadRequestException('올바른 회사 코드가 아닙니다.');
     }
 
-    const hashedPassword = await this.hash(request.password);
+    const hashedPassword = await this.hash(requestBody.password);
 
     const member = new Member();
-    member.account = request.account;
+    member.account = requestBody.account;
     member.password = hashedPassword;
-    member.email = request.email;
-    member.phone = request.phone;
-    member.memo = request.memo;
+    member.email = requestBody.email;
+    member.phone = requestBody.phone;
+    member.memo = requestBody.memo;
     member.company = company;
     member.status = MemberStatus.NOT_APPROVED;
 
     await this.memberRepository.save(member);
   }
 
-  async signIn(request: SignInRequest) {
+  async signIn(requestBody: SignInRequestBody) {
     const member = await this.memberRepository.findOneBy({
-      account: request.account,
+      account: requestBody.account,
     });
 
     const isCorrectPassword = await bcrypt.compare(
-      request.password,
+      requestBody.password,
       member.password,
     );
 
@@ -67,11 +61,14 @@ export class AuthService {
       throw new BadRequestException('비밀번호가 일치하지 않습니다.');
     }
 
-    if (_.isEqual(member.status, MemberStatus.APPROVED)) {
-      throw new UnauthorizedException(
-        '계정이 활성화된 상태가 아닙니다. 관리자에게 문의 해주세요',
-      );
-    }
+    return {
+      id: member.id,
+      account: member.account,
+    };
+  }
+
+  async logout(request: Request) {
+    console.log(request);
   }
 
   private async hash(plainText: string) {

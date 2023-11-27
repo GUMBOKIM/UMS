@@ -10,4 +10,6 @@ export default {
   database: 'union_mgmt',
   entities: Entities,
   synchronize: true,
+  logging: ['query', 'error'],
+  logger: 'simple-console',
 } as TypeOrmModuleOptions;

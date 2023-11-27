@@ -34,7 +34,7 @@ export class Member {
   @Column({ nullable: true })
   memo?: string;
 
-  @ManyToOne(() => Company, (company) => company.id)
+  @ManyToOne(() => Company, (company) => company.id, { eager: true })
   company: Company;
 
   @Column({ type: 'enum', enum: MemberStatus })
