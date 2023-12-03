@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { SignInRequestBody, SignUpRequestBody } from './auth.type';
+import { SignUpRequestBody } from './type/auth.type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member, MemberStatus } from '../entity/member';
 import { Repository } from 'typeorm';
@@ -17,13 +17,7 @@ export class AuthService {
   ) {}
 
   async signUp(requestBody: SignUpRequestBody) {
-    const existMember = await this.memberRepository.findOneBy({
-      account: requestBody.account,
-    });
-
-    if (!_.isEmpty(existMember)) {
-      throw new BadRequestException('동일한 아이디의 계정이 존재합니다.');
-    }
+    await this.duplicateMemberCheck(requestBody.account);
 
     const company = await this.companyRepository.findOneBy({
       id: requestBody.companyId,
@@ -45,34 +39,37 @@ export class AuthService {
     member.status = MemberStatus.NOT_APPROVED;
 
     await this.memberRepository.save(member);
-  }
 
-  async signIn(requestBody: SignInRequestBody) {
-    const member = await this.memberRepository.findOneBy({
-      account: requestBody.account,
-    });
-
-    const isCorrectPassword = await bcrypt.compare(
-      requestBody.password,
-      member.password,
-    );
-
-    if (!isCorrectPassword) {
-      throw new BadRequestException('비밀번호가 일치하지 않습니다.');
-    }
-
-    return {
-      id: member.id,
-      account: member.account,
-    };
-  }
-
-  async logout(request: Request) {
-    console.log(request);
+    return member;
   }
 
   private async hash(plainText: string) {
     const saltOrRounds = 10;
     return await bcrypt.hash(plainText, saltOrRounds);
+  }
+
+  private async duplicateMemberCheck(account: string) {
+    const existMember = await this.memberRepository.findOneBy({
+      account: account,
+    });
+
+    if (!_.isEmpty(existMember)) {
+      throw new BadRequestException('동일한 아이디의 계정이 존재합니다.');
+    }
+  }
+
+  async validateMember(account: string, password: string) {
+    const member = await this.memberRepository.findOneBy({ account });
+
+    if (!member) {
+      throw new BadRequestException('해당 계정이 존재하지 않습니다.');
+    }
+
+    const isCorrectPassword = await bcrypt.compare(password, member.password);
+    if (!isCorrectPassword) {
+      throw new BadRequestException('비밀번호가 일치하지 않습니다.');
+    }
+
+    return member;
   }
 }

@@ -9,7 +9,7 @@ export default {
   password: 'developer-gumbo',
   database: 'union_mgmt',
   entities: Entities,
-  synchronize: true,
+  // synchronize: true,
   logging: ['query', 'error'],
   logger: 'simple-console',
 } as TypeOrmModuleOptions;

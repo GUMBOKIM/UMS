@@ -17,7 +17,7 @@ export enum MemberStatus {
 @Entity()
 export class Member {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column({ unique: true })
   account: string;
