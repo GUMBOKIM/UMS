@@ -6,12 +6,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from '../company';
+import { Company } from '../base/company.entity';
 
 @Entity()
-export class ReceiveCategory {
+export class ForwardCategory {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id: string;
 
   @Column()
   name: string;

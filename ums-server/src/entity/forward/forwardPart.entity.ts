@@ -6,12 +6,16 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Part } from './part';
+import { ForwardPlan } from './forwardPlan.entity';
+import { Part } from '../base/part.entity';
 
 @Entity()
-export class Stock {
-  @PrimaryGeneratedColumn('uuid')
+export class ForwardPart {
+  @PrimaryGeneratedColumn('increment')
   id: string;
+
+  @ManyToOne(() => ForwardPlan, (receivePlan) => receivePlan.id)
+  plan: ForwardPlan;
 
   @ManyToOne(() => Part, (part) => part.id)
   part: Part;
@@ -19,8 +23,11 @@ export class Stock {
   @Column()
   lot: string;
 
-  @Column({ default: 0 })
+  @Column()
   amount: number;
+
+  @Column()
+  memo?: string;
 
   @CreateDateColumn()
   createdAt: Date;

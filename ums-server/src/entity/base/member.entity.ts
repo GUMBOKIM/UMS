@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from './company';
+import { Company } from './company.entity';
 
 export enum MemberStatus {
   NOT_APPROVED = 'NOT_APPROVED',

@@ -7,37 +7,32 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignUpRequestBody } from './type/auth.type';
 import { AuthenticatedGuard } from './authenticated.guard';
-import { AuthGuard } from '@nestjs/passport';
+import { SignInRequestDto, SignUpRequestDto } from './auth.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('sign-up')
-  async signUp(@Body() request: SignUpRequestBody) {
+  async signUp(@Body() request: SignUpRequestDto) {
     return this.authService.signUp(request);
   }
 
-  @UseGuards(AuthGuard('local'))
   @Post('sign-in')
-  async signIn() {
+  async signIn(@Body() request: SignInRequestDto, @Session() session: any) {
+    const member = await this.authService.validateMember(request);
     return 'login success';
   }
 
   @Get('session')
   async getAuthSession(@Session() session: Record<string, any>) {
-    console.log(session);
-    console.log(session.id);
-    console.log(Object.keys(session.cookie));
-    Object.keys(session).forEach((key) => console.log('key', session[key]));
+    return session.member;
   }
 
   @UseGuards(AuthenticatedGuard)
   @Get('protected')
   async getHello(@Session() session: Record<string, any>) {
-    console.log('session');
     return session;
   }
 

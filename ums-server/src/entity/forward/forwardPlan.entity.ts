@@ -7,10 +7,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from '../company';
-import { ForwardCategory } from './forwardCategory';
-import { ForwardPart } from './forwardPart';
-import { ForwardFactory } from './forwardFactory';
+import { Company } from '../base/company.entity';
+import { ForwardCategory } from './forwardCategory.entity';
+import { ForwardPart } from './forwardPart.entity';
+import { ForwardFactory } from './forwardFactory.entity';
 
 @Entity()
 export class ForwardPlan {

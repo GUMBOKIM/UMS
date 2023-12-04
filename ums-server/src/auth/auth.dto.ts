@@ -1,4 +1,4 @@
-export interface SignUpRequestBody {
+export interface SignUpRequestDto {
   account: string;
   password: string;
   email?: string;
@@ -7,7 +7,7 @@ export interface SignUpRequestBody {
   companyId: number;
 }
 
-export interface SignInRequestBody {
+export interface SignInRequestDto {
   account: string;
   password: string;
 }

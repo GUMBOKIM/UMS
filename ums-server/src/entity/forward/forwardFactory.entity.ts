@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from '../company';
+import { Company } from '../base/company.entity';
 
 @Entity()
 export class ForwardFactory {

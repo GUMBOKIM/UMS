@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { SignUpRequestBody } from './type/auth.type';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Member, MemberStatus } from '../entity/member';
+import { Member, MemberStatus } from '../entity/base/member.entity';
 import { Repository } from 'typeorm';
-import { Company } from '../entity/company';
+import { Company } from '../entity/base/company.entity';
 import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
+import { SignInRequestDto, SignUpRequestDto } from './auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
     private readonly companyRepository: Repository<Company>,
   ) {}
 
-  async signUp(requestBody: SignUpRequestBody) {
+  async signUp(requestBody: SignUpRequestDto) {
     await this.duplicateMemberCheck(requestBody.account);
 
     const company = await this.companyRepository.findOneBy({
@@ -58,14 +58,19 @@ export class AuthService {
     }
   }
 
-  async validateMember(account: string, password: string) {
-    const member = await this.memberRepository.findOneBy({ account });
+  async validateMember(request: SignInRequestDto) {
+    const member = await this.memberRepository.findOneBy({
+      account: request.account,
+    });
 
     if (!member) {
       throw new BadRequestException('해당 계정이 존재하지 않습니다.');
     }
 
-    const isCorrectPassword = await bcrypt.compare(password, member.password);
+    const isCorrectPassword = await bcrypt.compare(
+      request.password,
+      member.password,
+    );
     if (!isCorrectPassword) {
       throw new BadRequestException('비밀번호가 일치하지 않습니다.');
     }

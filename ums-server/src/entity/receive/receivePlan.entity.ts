@@ -7,9 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from '../company';
-import { ReceiveCategory } from './receiveCategory';
-import { ReceivePart } from './receivePart';
+import { Company } from '../base/company.entity';
+import { ReceiveCategory } from './receiveCategory.entity';
+import { ReceivePart } from './receivePart.entity';
 
 @Entity()
 export class ReceivePlan {
