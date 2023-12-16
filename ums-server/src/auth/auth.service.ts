@@ -1,11 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Member, MemberStatus } from '../entity/base/member.entity';
+import { Member } from '../entity/base/member.entity';
 import { Repository } from 'typeorm';
 import { Company } from '../entity/base/company.entity';
 import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
 import { SignInRequestDto, SignUpRequestDto } from './auth.dto';
+import { LoginMember } from './session/session.type';
+import { setLoginMemberOnRequest } from './session/session.util';
 
 @Injectable()
 export class AuthService {
@@ -36,7 +38,6 @@ export class AuthService {
     member.phone = requestBody.phone;
     member.memo = requestBody.memo;
     member.company = company;
-    member.status = MemberStatus.NOT_APPROVED;
 
     await this.memberRepository.save(member);
 
@@ -76,5 +77,22 @@ export class AuthService {
     }
 
     return member;
+  }
+
+  setLoginSession(request: any, member: Member) {
+    const loginMember: LoginMember = {
+      account: member.account,
+      email: member.email,
+      id: member.id,
+      memo: member.memo,
+      phone: member.phone,
+      company: {
+        id: member.company.id,
+        name: member.company.name,
+        type: member.company.type,
+      },
+    };
+    setLoginMemberOnRequest(request, loginMember);
+    return loginMember;
   }
 }

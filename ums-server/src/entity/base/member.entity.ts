@@ -8,12 +8,6 @@ import {
 } from 'typeorm';
 import { Company } from './company.entity';
 
-export enum MemberStatus {
-  NOT_APPROVED = 'NOT_APPROVED',
-  APPROVED = 'APPROVED',
-  DISABLED = 'DISABLED',
-}
-
 @Entity()
 export class Member {
   @PrimaryGeneratedColumn('increment')
@@ -36,9 +30,6 @@ export class Member {
 
   @ManyToOne(() => Company, (company) => company.id, { eager: true })
   company: Company;
-
-  @Column({ type: 'enum', enum: MemberStatus })
-  status: MemberStatus;
 
   @CreateDateColumn()
   createdAt: Date;

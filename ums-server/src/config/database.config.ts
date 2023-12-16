@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Session } from '../auth/session/session.entity';
+import { Entities } from '../entity/entities';
 
 export default {
   type: 'mysql',
@@ -8,8 +9,8 @@ export default {
   username: 'gumbo',
   password: 'developer-gumbo',
   database: 'union_mgmt',
-  entities: ['**/*.entity{.ts}', Session],
-  synchronize: true,
+  entities: [...Entities, Session],
+  // synchronize: true,
   logging: ['query', 'error'],
   logger: 'simple-console',
 } as TypeOrmModuleOptions;
