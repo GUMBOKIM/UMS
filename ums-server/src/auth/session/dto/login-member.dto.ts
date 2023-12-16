@@ -1,4 +1,4 @@
-import { CompanyType } from '../../entity/base/company.entity';
+import { CompanyType } from '../../../entity/base/company.entity';
 
 export interface LoginMember {
   id: number;

@@ -1,4 +1,4 @@
-import { LoginMember } from './session.type';
+import { LoginMember } from './dto';
 
 export const getLoginMemberOnRequest = (
   request: any,

@@ -8,25 +8,25 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignInRequestDto, SignUpRequestDto } from './auth.dto';
 import { Login } from './session/session.decorator';
-import { LoginMember } from './session/session.type';
+import { LoginMember } from './session/dto';
 import { SessionGuard } from './session/session.guard';
 import { CompanyType } from '../entity/base/company.entity';
 import { AllowedCompany } from './auth.decorator';
+import { SignUpDto, SignInDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('sign-up')
-  async signUp(@Body() signUpRequest: SignUpRequestDto) {
-    return this.authService.signUp(signUpRequest);
+  async signUp(@Body() signUpDto: SignUpDto) {
+    return this.authService.signUp(signUpDto);
   }
 
   @Post('sign-in')
-  async signIn(@Body() singInRequest: SignInRequestDto, @Req() request) {
-    const member = await this.authService.validateMember(singInRequest);
+  async signIn(@Body() singInDto: SignInDto, @Req() request) {
+    const member = await this.authService.validateMember(singInDto);
     return this.authService.setLoginSession(request, member);
   }
 

@@ -5,9 +5,9 @@ import { Repository } from 'typeorm';
 import { Company } from '../entity/base/company.entity';
 import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
-import { SignInRequestDto, SignUpRequestDto } from './auth.dto';
-import { LoginMember } from './session/session.type';
+import { LoginMember } from './session/dto';
 import { setLoginMemberOnRequest } from './session/session.util';
+import { SignUpDto, SignInDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
     private readonly companyRepository: Repository<Company>,
   ) {}
 
-  async signUp(requestBody: SignUpRequestDto) {
+  async signUp(requestBody: SignUpDto) {
     await this.duplicateMemberCheck(requestBody.account);
 
     const company = await this.companyRepository.findOneBy({
@@ -59,7 +59,7 @@ export class AuthService {
     }
   }
 
-  async validateMember(request: SignInRequestDto) {
+  async validateMember(request: SignInDto) {
     const member = await this.memberRepository.findOneBy({
       account: request.account,
     });
