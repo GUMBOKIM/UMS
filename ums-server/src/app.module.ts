@@ -1,25 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {Company} from "./company";
-import {Part} from "./part";
+import { AuthModule } from '@auth/auth.module';
+import { BaseModule } from '@base/base.module';
+import databaseConfig from '@config/database.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'gumbo',
-      password: 'developer-gumbo',
-      database: 'union_mgmt',
-      entities: [Company, Part],
-      synchronize: true,
-    }),
-
+    // TODO: Global 환경설정 추후 추가
+    // ConfigModule.forRoot(configOptions),
+    TypeOrmModule.forRoot(databaseConfig),
+    AuthModule,
+    BaseModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
