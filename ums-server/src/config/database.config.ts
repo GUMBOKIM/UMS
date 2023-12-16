@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Session } from '../auth/session/session.entity';
-import { Entities } from '../entity/entities';
+import { Session } from '@auth/session/session.entity';
+import { Entities } from '@entity/entities';
 
 export default {
   type: 'mysql',
