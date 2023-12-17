@@ -1,7 +1,6 @@
 import { Part, Stock, StockRepository } from '@entity/base';
 import {
   BadRequestException,
-  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -11,9 +10,7 @@ import { PartRepository } from '@entity/base/part.repository';
 @Injectable()
 export class StockService {
   constructor(
-    @Inject()
     private readonly stockRepository: StockRepository,
-    @Inject()
     private readonly partRepository: PartRepository,
   ) {}
 
@@ -42,9 +39,7 @@ export class StockService {
     }
   }
 
-  async findStocksByCompany() {
-    
-  }
+  async findStocksByCompany() {}
 
   private async addStock(
     stock: Stock,
