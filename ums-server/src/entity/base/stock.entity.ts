@@ -8,7 +8,9 @@ import {
 } from 'typeorm';
 import { Part } from './part.entity';
 
-@Entity()
+export const StockTableName = 'stock' as const;
+
+@Entity(StockTableName)
 export class Stock {
   @PrimaryGeneratedColumn('increment')
   id: string;

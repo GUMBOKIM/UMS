@@ -1,6 +1,6 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Session } from '@auth/session/session.entity';
 import { Entities } from '@entity/entities';
+import { DataSourceOptions } from 'typeorm';
 
 export default {
   type: 'mysql',
@@ -10,7 +10,6 @@ export default {
   password: 'developer-gumbo',
   database: 'union_mgmt',
   entities: [...Entities, Session],
-  // synchronize: true,
   logging: ['query', 'error'],
   logger: 'simple-console',
-} as TypeOrmModuleOptions;
+} as DataSourceOptions;

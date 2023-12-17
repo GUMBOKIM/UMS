@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "@auth/*": ["./src/auth/*"],
-      "@base/*": ["./src/base/*"],
+      "@base/*": ["./src/module/base/*"],
       "@entity/*": ["./src/entity/*"],
       "@config/*": ["./src/config/*"]
     }
