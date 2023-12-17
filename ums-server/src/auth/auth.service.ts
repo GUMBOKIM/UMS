@@ -1,13 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Member } from '../entity/base/member.entity';
 import { Repository } from 'typeorm';
-import { Company } from '../entity/base/company.entity';
 import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
 import { LoginMember } from './session/dto';
 import { setLoginMemberOnRequest } from './session/session.util';
 import { SignUpDto, SignInDto } from './dto';
+import { Company, Member } from '@entity/base';
 
 @Injectable()
 export class AuthService {
