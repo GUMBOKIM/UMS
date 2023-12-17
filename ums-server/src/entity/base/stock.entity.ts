@@ -10,7 +10,7 @@ import { Part } from './part.entity';
 
 @Entity()
 export class Stock {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('increment')
   id: string;
 
   @ManyToOne(() => Part, (part) => part.id)

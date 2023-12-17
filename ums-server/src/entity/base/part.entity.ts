@@ -10,8 +10,8 @@ import { Company } from './company.entity';
 
 @Entity()
 export class Part {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
   @Column()
   supplierCode: string;
