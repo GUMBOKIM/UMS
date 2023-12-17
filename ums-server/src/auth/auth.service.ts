@@ -39,7 +39,6 @@ export class AuthService {
     member.company = company;
 
     await this.memberRepository.save(member);
-
     return member;
   }
 

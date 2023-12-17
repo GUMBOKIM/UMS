@@ -8,9 +8,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Company } from '../base/company.entity';
-import { ForwardCategory } from './forwardCategory.entity';
-import { ForwardPart } from './forwardPart.entity';
-import { ForwardFactory } from './forwardFactory.entity';
+import { ForwardCategory } from './forward-category.entity';
+import { ForwardPart } from './forward-part.entity';
+import { ForwardFactory } from './forward-factory.entity';
 
 @Entity()
 export class ForwardPlan {

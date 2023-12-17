@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Company } from '../base/company.entity';
-import { ReceiveCategory } from './receiveCategory.entity';
-import { ReceivePart } from './receivePart.entity';
+import { ReceiveCategory } from './receive-category.entity';
+import { ReceivePart } from './receive-part.entity';
 
 @Entity()
 export class ReceivePlan {
