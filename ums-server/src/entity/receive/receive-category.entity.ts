@@ -1,3 +1,4 @@
+import { Company } from '@entity/base';
 import {
   Column,
   CreateDateColumn,
@@ -6,9 +7,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from '../base/company.entity';
 
-@Entity()
+const ReceiveCategoryTableName = 'receive_category';
+
+@Entity(ReceiveCategoryTableName)
 export class ReceiveCategory {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -16,8 +18,20 @@ export class ReceiveCategory {
   @Column()
   name: string;
 
-  @ManyToOne(() => Company, (company) => company.id)
+  @Column()
+  order: number;
+
+  @ManyToOne(() => ReceiveCategory, (category) => category.children)
+  parent?: ReceiveCategory;
+
+  @ManyToOne(() => ReceiveCategory, (category) => category.parent)
+  children: ReceiveCategory[];
+
+  @ManyToOne(() => Company, (company) => company.id, { eager: true })
   supplier: Company;
+
+  @ManyToOne(() => Company, (company) => company.id, { eager: true })
+  provider: Company;
 
   @CreateDateColumn()
   createdAt: Date;

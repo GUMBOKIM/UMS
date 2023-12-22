@@ -1,3 +1,4 @@
+import { Part } from '@entity/base';
 import {
   Column,
   CreateDateColumn,
@@ -7,17 +8,18 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ReceivePlan } from './receive-plan.entity';
-import { Part } from '../base/part.entity';
 
-@Entity()
-export class ReceivePart {
+const ReceivePlanPartTableName = 'receive_plan_part';
+
+@Entity(ReceivePlanPartTableName)
+export class ReceivePlanPart {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
   @ManyToOne(() => ReceivePlan, (receivePlan) => receivePlan.id)
   plan: ReceivePlan;
 
-  @ManyToOne(() => Part, (part) => part.id)
+  @ManyToOne(() => Part, (part) => part.id, { eager: true })
   part: Part;
 
   @Column()

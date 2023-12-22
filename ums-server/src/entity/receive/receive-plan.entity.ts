@@ -1,3 +1,5 @@
+import { Company } from '@entity/base';
+import { ReceivePlanPart } from '@entity/receive/receive-plan-part.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,11 +9,17 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Company } from '../base/company.entity';
 import { ReceiveCategory } from './receive-category.entity';
-import { ReceivePart } from './receive-part.entity';
 
-@Entity()
+export enum ReceiveStatus {
+  CREATE = 'CREATE',
+  COMPLETE = 'COMPLETE',
+  CANCEL = 'CANCEL',
+}
+
+const ReceivePlanTableName = 'receive_plan';
+
+@Entity(ReceivePlanTableName)
 export class ReceivePlan {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -22,14 +30,14 @@ export class ReceivePlan {
   @ManyToOne(() => Company, (company) => company.id)
   provider: Company;
 
-  @Column()
+  @Column({ type: 'date' })
   date: Date;
-
-  @ManyToOne(() => ReceiveCategory, (receiveCategory) => receiveCategory.id)
-  category: ReceiveCategory;
 
   @Column()
   order: number;
+
+  @Column()
+  category: ReceiveCategory;
 
   @Column({ nullable: true })
   carNumber?: string;
@@ -37,8 +45,11 @@ export class ReceivePlan {
   @Column({ nullable: true })
   memo?: string;
 
-  @OneToMany(() => ReceivePart, (detail) => detail.plan)
-  parts: ReceivePart[];
+  @OneToMany(() => ReceivePlanPart, (detail) => detail.plan)
+  parts: ReceivePlanPart[];
+
+  @Column({ type: 'enum', enum: ReceiveStatus })
+  receiveStatus: ReceiveStatus;
 
   @CreateDateColumn()
   createdAt: Date;
