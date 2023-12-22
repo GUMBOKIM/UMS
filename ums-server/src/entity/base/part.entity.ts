@@ -8,21 +8,23 @@ import {
 } from 'typeorm';
 import { Company } from './company.entity';
 
-@Entity()
+export const PartTableName = 'part' as const;
+
+@Entity(PartTableName)
 export class Part {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
-  @Column({ nullable: true })
-  providerCode: string;
+  @Column()
+  supplierCode: string;
 
-  @Column({ nullable: true })
+  @Column()
   customerCode: string;
 
-  @Column({ nullable: true })
-  providerName: string;
+  @Column()
+  supplierName: string;
 
-  @Column({ nullable: true })
+  @Column()
   customerName: string;
 
   @Column({ nullable: true })

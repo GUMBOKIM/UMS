@@ -12,7 +12,9 @@ export enum CompanyType {
   CUSTOMER = 'CUSTOMER',
 }
 
-@Entity()
+export const CompanyTableName = 'company' as const;
+
+@Entity(CompanyTableName)
 export class Company {
   @PrimaryGeneratedColumn('increment')
   id: number;

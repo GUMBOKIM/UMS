@@ -1,14 +1,11 @@
-import { Company } from './base/company.entity';
-import { Member } from './base/member.entity';
-import { Part } from './base/part.entity';
-import { Stock } from './base/stock.entity';
-import { ForwardCategory } from './forward/forwardCategory.entity';
-import { ForwardFactory } from './forward/forwardFactory.entity';
-import { ForwardPart } from './forward/forwardPart.entity';
-import { ForwardPlan } from './forward/forwardPlan.entity';
-import { ReceiveCategory } from './receive/receiveCategory.entity';
-import { ReceivePart } from './receive/receivePart.entity';
-import { ReceivePlan } from './receive/receivePlan.entity';
+import { Company, Member, Part, Stock } from './base';
+import {
+  ForwardCategory,
+  ForwardFactory,
+  ForwardPart,
+  ForwardPlan,
+} from './forward';
+import { ReceiveCategory, ReceivePart, ReceivePlan } from './receive';
 
 const BaseEntities = [Company, Member, Part, Stock];
 const ForwardEntities = [

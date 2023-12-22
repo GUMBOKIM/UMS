@@ -2,9 +2,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@root/*": ["./src/*"],
       "@auth/*": ["./src/auth/*"],
-      "@base/*": ["./src/base/*"],
+      "@base/*": ["./src/module/base/*"],
+      "@forward/*": ["./src/module/forward/*"],
+      "@receive/*": ["./src/module/receive/*"],
       "@entity/*": ["./src/entity/*"],
       "@config/*": ["./src/config/*"]
     }
