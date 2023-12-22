@@ -36,7 +36,9 @@ export class ReceivePlan {
   @Column()
   order: number;
 
-  @Column()
+  @ManyToOne(() => ReceiveCategory, (receiveCategory) => receiveCategory.id, {
+    eager: true,
+  })
   category: ReceiveCategory;
 
   @Column({ nullable: true })

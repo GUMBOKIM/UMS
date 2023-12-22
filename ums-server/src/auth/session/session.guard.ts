@@ -1,5 +1,5 @@
 import { Reflector } from '@nestjs/core';
-import { CompanyType } from '../../entity/base/company.entity';
+import { CompanyType } from '@entity/base';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { getLoginMemberOnRequest } from './session.util';
 import { AllowCompanyMetaKey } from '../auth.decorator';

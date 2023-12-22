@@ -1,4 +1,11 @@
-import { Company, Member, Part, Stock } from './base';
+import {
+  Company,
+  Member,
+  Part,
+  ProviderCustomerCompanyMap,
+  Stock,
+  SupplierProviderCompanyMap,
+} from './base';
 import {
   ForwardCategory,
   ForwardFactory,
@@ -7,13 +14,22 @@ import {
 } from './forward';
 import { ReceiveCategory, ReceivePlan, ReceivePlanPart } from './receive';
 
-const BaseEntities = [Company, Member, Part, Stock];
+const BaseEntities = [
+  Company,
+  Member,
+  Part,
+  Stock,
+  SupplierProviderCompanyMap,
+  ProviderCustomerCompanyMap,
+];
+
 const ForwardEntities = [
   ForwardCategory,
   ForwardFactory,
   ForwardPart,
   ForwardPlan,
 ];
+
 const ReceiveEntities = [ReceiveCategory, ReceivePlanPart, ReceivePlan];
 
 export const Entities = [
