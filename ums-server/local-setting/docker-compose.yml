@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    ports: 
+      - 3306:3306
+    # https://mariadb.com/kb/en/mariadb-server-docker-official-image-environment-variables/
+    environment:
+      MARIADB_DATABASE: union_mgmt
+      MARIADB_ROOT_PASSWORD: developer-gumbo

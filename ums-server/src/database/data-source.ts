@@ -1,9 +1,9 @@
-import databaseConfig from '@config/database.config.local';
+import LocalDataBaseConfig from '@config/database.local.config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
 
 const seederOptions: DataSourceOptions & SeederOptions = {
-  ...databaseConfig,
+  ...LocalDataBaseConfig,
   dropSchema: true,
   synchronize: true,
   seeds: ['src/database/seed/**/*{.ts,.js}'],
