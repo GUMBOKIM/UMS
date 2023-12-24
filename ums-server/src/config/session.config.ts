@@ -1,8 +1,8 @@
+import { Session } from '@auth/session/session.entity';
 import { INestApplication } from '@nestjs/common';
-import { DataSource } from 'typeorm';
-import * as session from 'express-session';
 import { TypeormStore } from 'connect-typeorm';
-import { Session } from '../auth/session/session.entity';
+import session from 'express-session';
+import { DataSource } from 'typeorm';
 
 export const sessionConfig = async (app: INestApplication<any>) => {
   // TODO: 추후 Redis로 변경

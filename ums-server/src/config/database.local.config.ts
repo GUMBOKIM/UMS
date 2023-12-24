@@ -10,8 +10,7 @@ const LocalDataBaseConfig = {
   password: 'developer-gumbo',
   database: 'union_mgmt',
   entities: [...Entities, Session],
-  logging: ['query', 'error'],
-  logger: 'simple-console',
+  logging: true,
 } as DataSourceOptions;
 
 export default LocalDataBaseConfig;

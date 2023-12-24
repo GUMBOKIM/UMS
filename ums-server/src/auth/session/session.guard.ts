@@ -1,8 +1,14 @@
-import { Reflector } from '@nestjs/core';
 import { CompanyType } from '@entity/base';
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { getLoginMemberOnRequest } from './session.util';
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { AllowCompanyMetaKey } from '../auth.decorator';
+import { getLoginMemberOnRequest } from './session.util';
 
 @Injectable()
 export class SessionGuard implements CanActivate {
@@ -13,7 +19,7 @@ export class SessionGuard implements CanActivate {
 
     const loginMember = getLoginMemberOnRequest(request);
     if (!loginMember) {
-      return false;
+      throw new UnauthorizedException('승인되지 않았습니다.');
     }
 
     // Allowed Company Check
@@ -24,7 +30,7 @@ export class SessionGuard implements CanActivate {
 
     if (companyTypes) {
       if (!companyTypes.includes(loginMember.company.type)) {
-        return false;
+        throw new ForbiddenException('권한이 없습니다.');
       }
     }
 

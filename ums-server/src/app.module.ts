@@ -5,6 +5,7 @@ import { ForwardModule } from '@forward/forward.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReceiveModule } from '@receive/receive.module';
+import { SettingModule } from 'src/module/setting/setting.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ReceiveModule } from '@receive/receive.module';
     BaseModule,
     ForwardModule,
     ReceiveModule,
+    SettingModule,
   ],
 })
 export class AppModule {}

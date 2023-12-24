@@ -17,6 +17,9 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    // for lodash import error
+    // https://velog.io/@mskwon/import-as-from-lodash%EB%8A%94-%EB%90%98%EB%8A%94%EB%8D%B0-import-from-lodash-%EC%99%9C-%EC%95%88%EB%90%A8
+    "esModuleInterop": true
   }
 }

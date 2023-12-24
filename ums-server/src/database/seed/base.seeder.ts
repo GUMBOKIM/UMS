@@ -1,12 +1,8 @@
+import { Company, CompanyType, Member, Part, Stock } from '@entity/base';
 import {
-  Company,
-  CompanyType,
-  Member,
-  Part,
   ProviderCustomerCompanyMap,
-  Stock,
   SupplierProviderCompanyMap,
-} from '@entity/base';
+} from '@entity/setting';
 import * as bcrypt from 'bcrypt';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
@@ -57,7 +53,7 @@ export class CompanySeeder implements Seeder {
     );
 
     const providerCustomerCompanyMap = new ProviderCustomerCompanyMap();
-    providerCustomerCompanyMap.provider = supplierCompany;
+    providerCustomerCompanyMap.provider = providerCompany;
     providerCustomerCompanyMap.customer = customerCompany;
 
     await providerCustomerCompanyMapRepository.save(providerCustomerCompanyMap);
