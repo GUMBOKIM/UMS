@@ -1,22 +1,12 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { Company } from '../base/company.entity';
+import { Company } from '@entity/base';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { ForwardCategory } from './forward-category.entity';
-import { ForwardPart } from './forward-part.entity';
 import { ForwardFactory } from './forward-factory.entity';
+import { ForwardPart } from './forward-part.entity';
 
 @Entity()
-export class ForwardPlan {
-  @PrimaryGeneratedColumn('increment')
-  id: string;
-
+export class ForwardPlan extends UMSBaseEntity {
   @ManyToOne(() => Company, (company) => company.id)
   provider: Company;
 
@@ -43,10 +33,4 @@ export class ForwardPlan {
 
   @OneToMany(() => ForwardPart, (detail) => detail.plan)
   parts: ForwardPart[];
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

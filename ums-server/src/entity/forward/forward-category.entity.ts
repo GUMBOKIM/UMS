@@ -1,27 +1,12 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { Company } from '../base/company.entity';
+import { Company } from '@entity/base';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
-export class ForwardCategory {
-  @PrimaryGeneratedColumn('increment')
-  id: string;
-
+export class ForwardCategory extends UMSBaseEntity {
   @Column()
   name: string;
 
   @ManyToOne(() => Company, (company) => company.id)
   supplier: Company;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

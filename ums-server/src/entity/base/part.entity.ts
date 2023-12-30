@@ -1,20 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { Company } from './company.entity';
 
 export const PartTableName = 'part' as const;
 
 @Entity(PartTableName)
-export class Part {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Part extends UMSBaseEntity {
   @Column()
   supplierCode: string;
 
@@ -42,10 +33,4 @@ export class Part {
 
   @ManyToOne(() => Company, (company) => company.id)
   customer: Company;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

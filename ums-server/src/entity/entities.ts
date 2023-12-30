@@ -2,6 +2,7 @@ import {
   ProviderCustomerCompanyMap,
   SupplierProviderCompanyMap,
 } from '@entity/setting';
+import { CompanyMap } from '@entity/setting/company-map.entity';
 import { Company, Member, Part, Stock } from './base';
 import {
   ForwardCategory,
@@ -25,6 +26,7 @@ const ReceiveEntities = [ReceiveCategory, ReceivePlanPart, ReceivePlan];
 const SettingEntities = [
   SupplierProviderCompanyMap,
   ProviderCustomerCompanyMap,
+  CompanyMap,
 ];
 
 export const Entities = [

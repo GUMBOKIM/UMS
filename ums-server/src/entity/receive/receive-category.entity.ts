@@ -1,20 +1,11 @@
 import { Company } from '@entity/base';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 const ReceiveCategoryTableName = 'receive_category';
 
 @Entity(ReceiveCategoryTableName)
-export class ReceiveCategory {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class ReceiveCategory extends UMSBaseEntity {
   @Column()
   name: string;
 
@@ -32,10 +23,4 @@ export class ReceiveCategory {
 
   @ManyToOne(() => Company, (company) => company.id, { eager: true })
   provider: Company;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

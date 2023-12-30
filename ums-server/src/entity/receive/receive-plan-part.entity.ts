@@ -1,21 +1,12 @@
 import { Part } from '@entity/base';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { ReceivePlan } from './receive-plan.entity';
 
 const ReceivePlanPartTableName = 'receive_plan_part';
 
 @Entity(ReceivePlanPartTableName)
-export class ReceivePlanPart {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class ReceivePlanPart extends UMSBaseEntity {
   @ManyToOne(() => ReceivePlan, (receivePlan) => receivePlan.id)
   plan: ReceivePlan;
 
@@ -30,10 +21,4 @@ export class ReceivePlanPart {
 
   @Column()
   memo?: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

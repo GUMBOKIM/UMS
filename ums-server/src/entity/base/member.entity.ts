@@ -1,20 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { Company } from './company.entity';
 
 export const MemberTableName = 'member' as const;
 
 @Entity(MemberTableName)
-export class Member {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Member extends UMSBaseEntity {
   @Column({ unique: true })
   account: string;
 
@@ -32,10 +23,4 @@ export class Member {
 
   @ManyToOne(() => Company, (company) => company.id, { eager: true })
   company: Company;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

@@ -1,20 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { Part } from './part.entity';
 
 export const StockTableName = 'stock' as const;
 
 @Entity(StockTableName)
-export class Stock {
-  @PrimaryGeneratedColumn('increment')
-  id: string;
-
+export class Stock extends UMSBaseEntity {
   @ManyToOne(() => Part, (part) => part.id)
   part: Part;
 
@@ -23,10 +14,4 @@ export class Stock {
 
   @Column({ default: 0 })
   amount: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

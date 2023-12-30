@@ -1,14 +1,7 @@
 import { Company } from '@entity/base';
 import { ReceivePlanPart } from '@entity/receive/receive-plan-part.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { ReceiveCategory } from './receive-category.entity';
 
 export enum ReceiveStatus {
@@ -20,10 +13,7 @@ export enum ReceiveStatus {
 const ReceivePlanTableName = 'receive_plan';
 
 @Entity(ReceivePlanTableName)
-export class ReceivePlan {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class ReceivePlan extends UMSBaseEntity {
   @ManyToOne(() => Company, (company) => company.id, { eager: true })
   supplier: Company;
 
@@ -52,10 +42,4 @@ export class ReceivePlan {
 
   @Column({ type: 'enum', enum: ReceiveStatus })
   receiveStatus: ReceiveStatus;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

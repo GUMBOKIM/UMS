@@ -1,19 +1,10 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Part } from '@entity/base';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { ForwardPlan } from './forward-plan.entity';
-import { Part } from '../base/part.entity';
 
 @Entity()
-export class ForwardPart {
-  @PrimaryGeneratedColumn('increment')
-  id: string;
-
+export class ForwardPart extends UMSBaseEntity {
   @ManyToOne(() => ForwardPlan, (receivePlan) => receivePlan.id)
   plan: ForwardPlan;
 
@@ -28,10 +19,4 @@ export class ForwardPart {
 
   @Column()
   memo?: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

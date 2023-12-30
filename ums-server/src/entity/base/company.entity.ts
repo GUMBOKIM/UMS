@@ -1,10 +1,5 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { UMSBaseEntity } from '@entity/ums-base.entity';
+import { Column, Entity } from 'typeorm';
 
 export enum CompanyType {
   SUPPLIER = 'SUPPLIER',
@@ -15,19 +10,10 @@ export enum CompanyType {
 export const CompanyTableName = 'company' as const;
 
 @Entity(CompanyTableName)
-export class Company {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Company extends UMSBaseEntity {
   @Column({ unique: true })
   name: string;
 
   @Column({ type: 'enum', enum: CompanyType })
   type: CompanyType;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }
