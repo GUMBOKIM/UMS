@@ -1,11 +1,11 @@
+import { UpdateStockDto } from '@base/stock/dto';
 import { Part, Stock, StockRepository } from '@entity/base';
+import { PartRepository } from '@entity/base/part.repository';
 import {
   BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UpdateStockDto } from './dto/update-stock.dto';
-import { PartRepository } from '@entity/base/part.repository';
 
 @Injectable()
 export class StockService {
@@ -38,8 +38,6 @@ export class StockService {
       await this.subtractStock(stock, amount);
     }
   }
-
-  async findStocksByCompany() {}
 
   private async addStock(
     stock: Stock,

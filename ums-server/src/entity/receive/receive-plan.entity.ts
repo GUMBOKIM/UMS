@@ -24,10 +24,10 @@ export class ReceivePlan {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => Company, (company) => company.id)
+  @ManyToOne(() => Company, (company) => company.id, { eager: true })
   supplier: Company;
 
-  @ManyToOne(() => Company, (company) => company.id)
+  @ManyToOne(() => Company, (company) => company.id, { eager: true })
   provider: Company;
 
   @Column({ type: 'date' })
